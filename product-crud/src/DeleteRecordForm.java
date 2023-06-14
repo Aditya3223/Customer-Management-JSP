@@ -1,0 +1,75 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+public class DeleteRecordForm {
+	JFrame fr = new JFrame("Delete Form");
+	JLabel la=new JLabel("Enter poduct id:");
+	JTextField tb=new JTextField();
+	JButton bt=new JButton("Delete Record");
+	PreparedStatement ps;
+	public DeleteRecordForm()
+	{
+		fr.setSize(500,500);
+		fr.setLocationRelativeTo(null);
+		fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		fr.setResizable(false);
+		addComponents();
+		dbConnection();
+		fr.setVisible(true);
+	}
+	private void addComponents()
+	{
+		fr.setLayout(null);
+		Font fo=new Font("arial",0,19);
+		la.setBounds(50,150,200,30);
+		la.setFont(fo);
+		fr.add(la);
+		tb.setBounds(220,150,200,30);
+		fr.add(tb);
+		tb.setFont(fo);
+		bt.setBounds(175,250,150,30);
+		fr.add(bt);
+		bt.addActionListener(new DeleteListener());
+	}
+	private void dbConnection()
+	{
+		try
+		{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/advjava","root","mysql");
+			String query="delete from product where pid=?";
+			ps=cn.prepareStatement(query);
+			System.out.println("Connected...");
+		}
+		catch(Exception ex)
+		{
+			System.out.println(ex);
+		}
+	}
+	class DeleteListener implements ActionListener
+	{
+
+		public void actionPerformed(ActionEvent arg0) 
+		{
+			try
+			{
+				ps.setString(1, tb.getText());
+				int n=ps.executeUpdate();
+				if(n>=1)
+					JOptionPane.showMessageDialog(fr, "Product record has been deleted successfully");
+				else
+					JOptionPane.showMessageDialog(fr,"Product record does not exist");
+			
+			}
+			catch(Exception ex)
+			{
+				System.out.println(ex);
+			}
+		}
+	}
+	public static void main(String[] args) 
+	{
+		new DeleteRecordForm();
+	}
+}

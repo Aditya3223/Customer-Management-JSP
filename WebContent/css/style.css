@@ -1,0 +1,39 @@
+*{
+	margin:0vw;
+	padding:0vw;
+}
+.headline{
+	text-align: center;
+	background-color:limegreen;
+	color:yellow;
+	font-size: 2vw;
+	font-weight: bold;
+}
+
+.menuItems{
+	display:inline-block;
+	text-align: center;
+	text-decoration: none;
+	padding: .4vw 1vw;
+}
+.textDisplay{
+	text-align: center
+}
+.menuCategory{
+	text-align: center;
+	margin:left;
+	margin:right;
+	text-decoration: none;
+	color:orange;
+	font-size: 1.5vw;
+	font-weight: bold;
+}
+button{
+		background-color: rgb(235,127,167);
+  	border: none;
+  	color: white;
+  	padding: .3vw 2vw;
+  	text-align: center;
+  	font-size: 1.5vw;
+  	cursor: hand;
+}
